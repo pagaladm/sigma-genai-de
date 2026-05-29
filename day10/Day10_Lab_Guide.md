@@ -144,7 +144,7 @@ Write down: What is wrong with this query? What would you say to the engineer wh
 
 ### Pre-requisites
 - Lab 1 complete (agent_outputs/ exists)
-- `python tests/validate_day10.py` shows all ✅
+- `python3 tests/validate_day10.py` shows all ✅
 
 ### Steps
 
@@ -157,7 +157,7 @@ Open `2_langgraph_sql_agent.py`. Find and read:
 
 **Step 2 — Run the agent (first time)**
 ```bash
-python 2_langgraph_sql_agent.py
+python3 2_langgraph_sql_agent.py
 ```
 
 You will see the graph execute in sequence. Watch for the reviewer's feedback appearing in the generator's second attempt.
@@ -265,7 +265,7 @@ Open `3_crewai_de_team.py`. Find `data_scout`, `sql_surgeon`, `quality_guardian`
 
 **Step 2 — Run the crew**
 ```bash
-python 3_crewai_de_team.py
+python3 3_crewai_de_team.py
 ```
 
 The terminal will show each agent's verbose output. Let it run to completion — do not interrupt.
@@ -343,7 +343,7 @@ Then run the lab and watch whether the agent finds the same bugs — and whether
 
 **Step 1 — Run the agent (first time)**
 ```bash
-python 4_stretch_goal_agent_memory.py
+python3 4_stretch_goal_agent_memory.py
 ```
 
 Watch the output:
