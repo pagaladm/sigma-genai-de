@@ -1,6 +1,6 @@
 {
   "agent": "PIISensitivityAgent",
-  "run_timestamp": "2026-06-01T12:02:50.167425",
+  "run_timestamp": "2026-06-01T15:18:52.630267",
   "input_file": "customers_raw.csv",
   "dataset_classification": "Restricted",
   "load_restriction": "BLOCK load until PII masked \u2014 compliance sign-off required",
@@ -50,7 +50,7 @@
       "pii_type": "Identifier",
       "sensitivity": "Confidential",
       "confidence": "llm",
-      "masking_strategy": "Mask or encrypt to protect individual identity.",
+      "masking_strategy": "Anonymize or pseudonymize to protect identity.",
       "detect_method": "llm"
     }
   ],
@@ -59,5 +59,5 @@
     "Aadhaar: UIDAI mandate \u2014 only last 4 digits may be stored",
     "All Restricted data requires DLP tool scan before prod load"
   ],
-  "student_judgment": "Yes, for sensitive datasets I would run the LLM scan even if regex finds nothing, because regex can miss abbreviated or unusual column names like emp_nm and acct_no. The tradeoff is higher cost and slightly slower processing, but the risk of missing PII and causing a compliance violation is much more expensive than the extra LLM cost."
+  "student_judgment": "I thing picking random \"n\" rows (n can vary based on our llm), and verifying with LLM is better option... because it will be like 2-way verification, even thouh regex doesnt match..we can verify random data.. THIS WAY WE CAN SAVE COST AS WELL AS WE WONT COMPROMISE RISK....(:)"
 }

@@ -1,6 +1,6 @@
 {
   "pattern": "sequential_pipeline",
-  "timestamp": "2026-06-01T12:00:45.141358",
+  "timestamp": "2026-06-01T11:57:09.113475",
   "input_file": {
     "filename": "transactions_raw.csv",
     "row_count": 500,
@@ -34,7 +34,7 @@
         "2 invalid dates",
         "1 unknown currency"
       ],
-      "recommended_next_action": "Perform data cleaning to handle blank transaction_ids, null and negative amounts, invalid dates, and unknown currency. Validate and impute or remove problematic data points.",
+      "recommended_next_action": "Perform data cleaning to handle blank transaction_ids, null and negative amounts, invalid dates, and unknown currency before proceeding to the next stage.",
       "pass_to_next": {
         "filename": "transactions_raw.csv",
         "row_count": 500,
@@ -56,29 +56,34 @@
           "3 negative amounts",
           "2 invalid dates",
           "1 unknown currency"
-        ],
-        "completeness_percentage": 95.6
+        ]
       },
       "_stage": "Profile",
       "_agent": "Profiler Agent",
-      "_timestamp": "2026-06-01T12:00:40.699893"
+      "_timestamp": "2026-06-01T11:56:59.389949"
     },
     {
-      "findings": [
+      "quality_rules": [
         {
           "rule": "No blank transaction_ids",
           "classification": "block-load",
-          "description": "Blank transaction_ids cannot be processed as they are essential for tracking and reconciliation. This issue must be resolved before loading."
+          "description": "Transaction IDs must be present for each transaction to ensure proper tracking and reconciliation.",
+          "issue_count": 4,
+          "auto_fixable": false
         },
         {
-          "rule": "No negative amounts",
+          "rule": "Valid transaction amounts",
           "classification": "quarantine",
-          "description": "Negative amounts are not valid for financial transactions. These records should be reviewed and corrected or excluded from the load."
+          "description": "Transaction amounts should be non-negative and not null to maintain financial accuracy.",
+          "issue_count": 10,
+          "auto_fixable": false
         },
         {
-          "rule": "Valid dates",
-          "classification": "block-load",
-          "description": "Invalid dates can lead to incorrect analysis and reporting. This issue must be resolved before loading."
+          "rule": "Valid transaction dates",
+          "classification": "quarantine",
+          "description": "Transaction dates must be valid to ensure proper temporal analysis and reporting.",
+          "issue_count": 2,
+          "auto_fixable": false
         }
       ],
       "pass_to_next": {
@@ -103,27 +108,44 @@
           "2 invalid dates",
           "1 unknown currency"
         ],
-        "completeness_percentage": 95.6,
-        "resolved_issues": {
-          "blank_transaction_ids": 4,
-          "null_amounts": 7,
-          "negative_amounts": 3,
-          "invalid_dates": 2,
-          "unknown_currency": 1
+        "quality_checks": {
+          "blank_transaction_ids": {
+            "status": "block-load",
+            "issue_count": 4
+          },
+          "invalid_amounts": {
+            "status": "quarantine",
+            "issue_count": 10
+          },
+          "invalid_dates": {
+            "status": "quarantine",
+            "issue_count": 2
+          }
         }
       },
       "_stage": "Validate",
       "_agent": "Quality Agent",
-      "_timestamp": "2026-06-01T12:00:43.407037"
+      "_timestamp": "2026-06-01T11:57:06.026883"
     },
     {
       "load_decision": "quarantined_partial",
       "findings": {
-        "blank_transaction_ids": "4 blank transaction_ids",
-        "null_amounts": "7 null amounts",
-        "negative_amounts": "3 negative amounts",
-        "invalid_dates": "2 invalid dates",
-        "unknown_currency": "1 unknown currency"
+        "blank_transaction_ids": {
+          "status": "block-load",
+          "issue_count": 4
+        },
+        "invalid_amounts": {
+          "status": "quarantine",
+          "issue_count": 10
+        },
+        "invalid_dates": {
+          "status": "quarantine",
+          "issue_count": 2
+        },
+        "unknown_currency": {
+          "status": "quarantine",
+          "issue_count": 1
+        }
       },
       "pass_to_next": {
         "filename": "transactions_raw.csv",
@@ -140,20 +162,37 @@
           "payment_method",
           "merchant_city"
         ],
-        "completeness_percentage": 95.6,
-        "resolved_issues": {
-          "blank_transaction_ids": 4,
-          "null_amounts": 7,
-          "negative_amounts": 3,
-          "invalid_dates": 2,
-          "unknown_currency": 1
+        "sample_issues": [
+          "4 blank transaction_ids",
+          "7 null amounts",
+          "3 negative amounts",
+          "2 invalid dates",
+          "1 unknown currency"
+        ],
+        "quality_checks": {
+          "blank_transaction_ids": {
+            "status": "block-load",
+            "issue_count": 4
+          },
+          "invalid_amounts": {
+            "status": "quarantine",
+            "issue_count": 10
+          },
+          "invalid_dates": {
+            "status": "quarantine",
+            "issue_count": 2
+          },
+          "unknown_currency": {
+            "status": "quarantine",
+            "issue_count": 1
+          }
         }
       },
       "_stage": "LoadDecision",
       "_agent": "Loader Agent",
-      "_timestamp": "2026-06-01T12:00:45.140489"
+      "_timestamp": "2026-06-01T11:57:09.112401"
     }
   ],
   "final_decision": "quarantined_partial",
-  "student_judgment": "The QualityAgent may still be processing while the PIIAgent finishes, causing downstream steps to run with incomplete data."
+  "student_judgment": "If the PIIAgent identifies critical privacy violations that require immediate quarantine, the QualityAgent will continue running for  another 43 minutes, wasting significant compute and time resources on a file that is already rejected."
 }

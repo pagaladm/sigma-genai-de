@@ -24,7 +24,7 @@
       "kwargs": {
         "column": "amount",
         "min_value": 0,
-        "max_value": 10000000
+        "max_value": 1000000
       },
       "severity": "high",
       "auto_fixable": false,

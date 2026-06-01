@@ -43,11 +43,11 @@ An **Ingestion Quality Agent** that autonomously receives a new CSV, profiles it
 
 | # | Script | What It Does | Key Output |
 |---|--------|-------------|------------|
-| 0 | `python3 lab/sample_data.py` | Generate test CSVs | `data/transactions_raw.csv`, `data/customers_raw.csv` |
-| 1 | `python3 lab/1_multi_agent_pipeline.py` | Supervisor · Swarm · Sequential patterns | `agent_outputs/supervisor_result.json`, `swarm_result.json`, `pipeline_result.json` |
-| 2 | `python3 lab/2_ingestion_quality_agent.py` | **The main lab** — full 6-step quality agent | `quality_report.json`, `ge_expectations.json`, `clean_output.csv`, `quarantine.csv` |
-| 3 | `python3 lab/3_pii_sensitivity_agent.py` | PII detection + sensitivity classification | `pii_scan_report.json`, `sensitivity_report.json` |
-| 4 | `python3 lab/4_stretch_goal_self_heal_loop.py` | Self-heal loop (stretch goal — has TODO) | `self_heal_incident_report.json` |
+| 0 | `python lab/sample_data.py` | Generate test CSVs | `data/transactions_raw.csv`, `data/customers_raw.csv` |
+| 1 | `python lab/1_multi_agent_pipeline.py` | Supervisor · Swarm · Sequential patterns | `agent_outputs/supervisor_result.json`, `swarm_result.json`, `pipeline_result.json` |
+| 2 | `python lab/2_ingestion_quality_agent.py` | **The main lab** — full 6-step quality agent | `quality_report.json`, `ge_expectations.json`, `clean_output.csv`, `quarantine.csv` |
+| 3 | `python lab/3_pii_sensitivity_agent.py` | PII detection + sensitivity classification | `pii_scan_report.json`, `sensitivity_report.json` |
+| 4 | `python lab/4_stretch_goal_self_heal_loop.py` | Self-heal loop (stretch goal — has TODO) | `self_heal_incident_report.json` |
 
 ---
 

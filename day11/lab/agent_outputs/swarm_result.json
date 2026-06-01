@@ -1,6 +1,6 @@
 {
   "pattern": "swarm",
-  "timestamp": "2026-06-01T12:00:37.472032",
+  "timestamp": "2026-06-01T11:56:57.665927",
   "agents": [
     "SwarmAgent-A",
     "SwarmAgent-B",
@@ -13,7 +13,7 @@
       "rows_processed": 50,
       "nulls_found": 5,
       "status": "completed",
-      "timestamp": "2026-06-01T12:00:36.951974"
+      "timestamp": "2026-06-01T11:56:57.155039"
     },
     {
       "agent_id": "SwarmAgent-B",
@@ -21,7 +21,7 @@
       "rows_processed": 50,
       "nulls_found": 5,
       "status": "completed",
-      "timestamp": "2026-06-01T12:00:37.056466"
+      "timestamp": "2026-06-01T11:56:57.257238"
     },
     {
       "agent_id": "SwarmAgent-C",
@@ -29,7 +29,7 @@
       "rows_processed": 50,
       "nulls_found": 5,
       "status": "completed",
-      "timestamp": "2026-06-01T12:00:37.161387"
+      "timestamp": "2026-06-01T11:56:57.359958"
     },
     {
       "agent_id": "SwarmAgent-A",
@@ -37,7 +37,7 @@
       "rows_processed": 50,
       "nulls_found": 5,
       "status": "completed",
-      "timestamp": "2026-06-01T12:00:37.266701"
+      "timestamp": "2026-06-01T11:56:57.462427"
     },
     {
       "agent_id": "SwarmAgent-B",
@@ -45,7 +45,7 @@
       "rows_processed": 50,
       "nulls_found": 5,
       "status": "completed",
-      "timestamp": "2026-06-01T12:00:37.369028"
+      "timestamp": "2026-06-01T11:56:57.563873"
     },
     {
       "agent_id": "SwarmAgent-C",
@@ -53,7 +53,7 @@
       "rows_processed": 50,
       "nulls_found": 5,
       "status": "completed",
-      "timestamp": "2026-06-01T12:00:37.471506"
+      "timestamp": "2026-06-01T11:56:57.665211"
     }
   ],
   "total_rows": 300,

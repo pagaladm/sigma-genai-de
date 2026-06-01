@@ -1,6 +1,6 @@
 {
   "agent": "PIISensitivityAgent",
-  "run_timestamp": "2026-06-01T12:02:50.167319",
+  "run_timestamp": "2026-06-01T15:18:52.630228",
   "input_file": "customers_raw.csv",
   "total_columns": 9,
   "pii_columns_found": 6,
@@ -52,7 +52,7 @@
       "sensitivity": "Confidential",
       "confidence": "llm",
       "reasoning": "Customer ID can be linked to an individual, making it sensitive.",
-      "masking_recommendation": "Mask or encrypt to protect individual identity.",
+      "masking_recommendation": "Anonymize or pseudonymize to protect identity.",
       "detection_method": "llm"
     }
   }

@@ -1,7 +1,7 @@
 {
   "agent": "IngestionQualityAgent",
   "version": "1.0",
-  "run_timestamp": "2026-06-01T12:01:57.028769",
+  "run_timestamp": "2026-06-01T14:32:37.423848",
   "input_file": "transactions_raw.csv",
   "profile_summary": {
     "total_rows": 500,
@@ -53,12 +53,12 @@
   "quarantine_pct": 4.8,
   "load_decision": {
     "load_decision": "quarantine_and_load",
-    "load_decision_reason": "Quarantine rows are below 10% threshold but critical checks failed.",
+    "load_decision_reason": "Critical checks failed and quarantine percentage is above 10%.",
     "alert_required": true,
     "recommended_actions": [
-      "Investigate the 24 rows with null and non-unique 'transaction_id' values.",
-      "Review and correct the 30 rows where 'amount' values are out of expected range.",
-      "Validate and fix the 11 rows with invalid 'transaction_date' formats."
+      "Investigate the root cause of null and non-unique 'transaction_id' values.",
+      "Review and correct the 'amount' values that failed the range check.",
+      "Ensure 'transaction_date' and 'currency' values conform to expected formats and sets."
     ]
   },
   "check_details": [
@@ -81,7 +81,7 @@
       "column": "amount",
       "severity": "high",
       "passed": false,
-      "failed_row_count": 30
+      "failed_row_count": 38
     },
     {
       "expectation": "expect_column_values_to_match_regex",
@@ -133,5 +133,5 @@
       "failed_row_count": 0
     }
   ],
-  "student_judgment": "Do not load the quarantined rows until the quality check is completed; only load the validated data. Add a guardrail that automatically blocks ingestion when the percentage of quarantined or failed rows exceeds a defined threshold and requires approval before proceeding."
+  "student_judgment": "I would involve human in the middel(like we can involve human decisions when we were in \"LOAD DECISION\" automation step) & also we do ABC check for the quality check purpose......(:)"
 }
