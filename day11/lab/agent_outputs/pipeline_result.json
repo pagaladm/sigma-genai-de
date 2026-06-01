@@ -1,0 +1,159 @@
+{
+  "pattern": "sequential_pipeline",
+  "timestamp": "2026-06-01T12:00:45.141358",
+  "input_file": {
+    "filename": "transactions_raw.csv",
+    "row_count": 500,
+    "columns": [
+      "transaction_id",
+      "merchant_name",
+      "category",
+      "amount",
+      "currency",
+      "transaction_date",
+      "status",
+      "customer_id",
+      "payment_method",
+      "merchant_city"
+    ],
+    "sample_issues": [
+      "4 blank transaction_ids",
+      "7 null amounts",
+      "3 negative amounts",
+      "2 invalid dates",
+      "1 unknown currency"
+    ]
+  },
+  "stages": [
+    {
+      "completeness_percentage": 95.6,
+      "key_issues": [
+        "4 blank transaction_ids",
+        "7 null amounts",
+        "3 negative amounts",
+        "2 invalid dates",
+        "1 unknown currency"
+      ],
+      "recommended_next_action": "Perform data cleaning to handle blank transaction_ids, null and negative amounts, invalid dates, and unknown currency. Validate and impute or remove problematic data points.",
+      "pass_to_next": {
+        "filename": "transactions_raw.csv",
+        "row_count": 500,
+        "columns": [
+          "transaction_id",
+          "merchant_name",
+          "category",
+          "amount",
+          "currency",
+          "transaction_date",
+          "status",
+          "customer_id",
+          "payment_method",
+          "merchant_city"
+        ],
+        "sample_issues": [
+          "4 blank transaction_ids",
+          "7 null amounts",
+          "3 negative amounts",
+          "2 invalid dates",
+          "1 unknown currency"
+        ],
+        "completeness_percentage": 95.6
+      },
+      "_stage": "Profile",
+      "_agent": "Profiler Agent",
+      "_timestamp": "2026-06-01T12:00:40.699893"
+    },
+    {
+      "findings": [
+        {
+          "rule": "No blank transaction_ids",
+          "classification": "block-load",
+          "description": "Blank transaction_ids cannot be processed as they are essential for tracking and reconciliation. This issue must be resolved before loading."
+        },
+        {
+          "rule": "No negative amounts",
+          "classification": "quarantine",
+          "description": "Negative amounts are not valid for financial transactions. These records should be reviewed and corrected or excluded from the load."
+        },
+        {
+          "rule": "Valid dates",
+          "classification": "block-load",
+          "description": "Invalid dates can lead to incorrect analysis and reporting. This issue must be resolved before loading."
+        }
+      ],
+      "pass_to_next": {
+        "filename": "transactions_raw.csv",
+        "row_count": 500,
+        "columns": [
+          "transaction_id",
+          "merchant_name",
+          "category",
+          "amount",
+          "currency",
+          "transaction_date",
+          "status",
+          "customer_id",
+          "payment_method",
+          "merchant_city"
+        ],
+        "sample_issues": [
+          "4 blank transaction_ids",
+          "7 null amounts",
+          "3 negative amounts",
+          "2 invalid dates",
+          "1 unknown currency"
+        ],
+        "completeness_percentage": 95.6,
+        "resolved_issues": {
+          "blank_transaction_ids": 4,
+          "null_amounts": 7,
+          "negative_amounts": 3,
+          "invalid_dates": 2,
+          "unknown_currency": 1
+        }
+      },
+      "_stage": "Validate",
+      "_agent": "Quality Agent",
+      "_timestamp": "2026-06-01T12:00:43.407037"
+    },
+    {
+      "load_decision": "quarantined_partial",
+      "findings": {
+        "blank_transaction_ids": "4 blank transaction_ids",
+        "null_amounts": "7 null amounts",
+        "negative_amounts": "3 negative amounts",
+        "invalid_dates": "2 invalid dates",
+        "unknown_currency": "1 unknown currency"
+      },
+      "pass_to_next": {
+        "filename": "transactions_raw.csv",
+        "row_count": 500,
+        "columns": [
+          "transaction_id",
+          "merchant_name",
+          "category",
+          "amount",
+          "currency",
+          "transaction_date",
+          "status",
+          "customer_id",
+          "payment_method",
+          "merchant_city"
+        ],
+        "completeness_percentage": 95.6,
+        "resolved_issues": {
+          "blank_transaction_ids": 4,
+          "null_amounts": 7,
+          "negative_amounts": 3,
+          "invalid_dates": 2,
+          "unknown_currency": 1
+        }
+      },
+      "_stage": "LoadDecision",
+      "_agent": "Loader Agent",
+      "_timestamp": "2026-06-01T12:00:45.140489"
+    }
+  ],
+  "final_decision": "quarantined_partial",
+  "student_judgment": "The QualityAgent may still be processing while the PIIAgent finishes, causing downstream steps to run with incomplete data."
+}
