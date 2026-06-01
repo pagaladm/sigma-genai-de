@@ -78,4 +78,8 @@ Refer to Google Drive - Day 7 - Day7_Spec_Review.xlsx - Fill this as a Team -
 **Use Template in Google Drive to fill and submit:** You will be asked a tricky question on the Spec and be prepared for that !!!!! :-()
 
 
-Note : When you do the next Lab - Module 1 (`1_spec_to_pipeline.py`) will automatically detect that file and use YOUR spec instead of the sample. Your `pipeline_brain/generated_pipeline.py` will be unique to your team's scenario.
+    Note : When you do the next Lab - Module 1 (`1_spec_to_pipeline.py`) will automatically detect that file and use YOUR spec instead of the sample. Your `pipeline_brain/generated_pipeline.py` will be unique to your team's scenario.
+
+
+
+

@@ -4,7 +4,7 @@
 
 ```bash
 cd repo/day10
-python tests/validate_day10.py    # must show all ✅ before starting
+python3 tests/validate_day10.py    # must show all ✅ before starting
 pip install -r lab/requirements.txt
 ```
 

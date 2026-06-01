@@ -50,7 +50,7 @@ except ImportError:
     sys.exit(1)
 
 # ── Model / region ────────────────────────────────────────────────────────────
-MODEL_ID_LITE = "amazon.nova-lite-v1:0"
+MODEL_ID_LITE = "amazon.nova-pro-v1:0"
 REGION        = "us-east-1"
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
@@ -58,7 +58,7 @@ SCRIPT_DIR      = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR      = os.path.normpath(os.path.join(SCRIPT_DIR, "..", "output"))
 COMPETITIVE_DIR = OUTPUT_DIR   # all sprint outputs go to labs/output/
 CHALLENGE_PATH  = os.path.join(SCRIPT_DIR, "challenge_pipeline.py")
-
+DEVOPS_BRAIN_DIR = SCRIPT_DIR
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # ── ANSI colour helpers ───────────────────────────────────────────────────────
@@ -227,8 +227,8 @@ def create_challenge_pipeline():
 # BEDROCK HELPER
 # ══════════════════════════════════════════════════════════════════════════════
 
-def call_nova_lite(client, system_prompt: str, user_message: str) -> str:
-    """Call Bedrock Nova Lite and return the response text."""
+def call_nova_pro(client, system_prompt: str, user_message: str) -> str:
+    """Call Bedrock Nova pro and return the response text."""
     body = {
         "messages": [
             {"role": "user", "content": [{"text": user_message}]}
@@ -261,10 +261,10 @@ def strip_fences(text: str) -> str:
 
 def check_code_review(client) -> dict:
     """
-    Ask Bedrock Nova Lite to review challenge_pipeline.py.
+    Ask Bedrock Nova pro to review challenge_pipeline.py.
     PASS if the AI identifies at least 3 of the 4 planted bugs.
     """
-    print(bold("CHECK 1 — Code Review (Nova Lite on challenge_pipeline.py)"))
+    print(bold("CHECK 1 — Code Review (Nova pro on challenge_pipeline.py)"))
 
     with open(CHALLENGE_PATH, "r", encoding="utf-8") as f:
         source = f.read()
@@ -297,7 +297,7 @@ SCRIPT:
 """
 
     print("  Calling Bedrock Nova Lite...")
-    raw = call_nova_lite(client, system_prompt, user_message)
+    raw = call_nova_pro(client, system_prompt, user_message)
     review_text = strip_fences(raw)
 
     # Count severity hits
@@ -393,7 +393,7 @@ def check_documentation(client) -> dict:
     doc_reason = ""
     try:
         print("  Calling Bedrock Nova Lite for documentation score...")
-        raw = call_nova_lite(client, system_prompt, user_message)
+        raw = call_nova_pro(client, system_prompt, user_message)
         parsed = json.loads(strip_fences(raw))
         doc_score  = parsed.get("score")
         doc_reason = parsed.get("reason", "")
@@ -460,7 +460,7 @@ into the test file so it runs without any imports from challenge_pipeline.
 """
 
     print("  Calling Bedrock Nova Lite to generate tests...")
-    raw = call_nova_lite(client, system_prompt, user_message)
+    raw = call_nova_pro(client, system_prompt, user_message)
     test_code = strip_fences(raw)
 
     # Ensure the test code has proper imports
@@ -690,7 +690,7 @@ def print_scorecard(checks: list) -> int:
         print(f"\n  {yellow(bold('CONDITIONAL SHIP'))}  Fix the red items above before merging.")
     else:
         verdict = "DOESN'T SHIP"
-        print(f"\n  {red(bold('DOESN\'T SHIP ✗'))}  Too many failures. This PR is not ready.")
+        print(f"\n  {red(bold('DOESNT SHIP ✗'))}  Too many failures. This PR is not ready.")
 
     print("=" * 68)
     return score, verdict
