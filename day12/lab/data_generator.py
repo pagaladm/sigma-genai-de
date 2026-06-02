@@ -18,6 +18,7 @@ Usage:
 """
 
 import argparse, boto3, json, os, random, sys, time
+from fileinput import filename
 from datetime import datetime, timedelta
 from pathlib import Path
 from dotenv import load_dotenv
@@ -230,7 +231,18 @@ def main():
             amt  = rec.get("amount", 0)
             tid  = rec.get("transaction_id","NULL") or "NULL"
             print(f"  [OK] {str(tid):12} | {name:12} | INR {float(amt):>10,.2f}")
+    # Save locally for agent analysis
+    os.makedirs("generated_data", exist_ok=True)
 
+    if args.mode == "clean":
+        filename = "generated_data/clean_transactions.json"
+    else:
+        filename = f"generated_data/{args.inject}.json"
+
+    with open(filename, "w") as f:
+        json.dump(records, f, indent=2)
+
+    print(f"  Local File: {filename}")
     print("=" * 60)
 
     # Write to S3
