@@ -1,0 +1,8 @@
+{
+  "lab": "1 - Mystery Domain",
+  "folder": "mystery_b",
+  "industry_guess": "food delivery app",
+  "sensitive_columns": "bank_account_number, mobile_number,home_address",
+  "hacker_target": "stg_riders.sql",
+  "timestamp": "2026-06-03T06:27:56.114208+00:00"
+}
