@@ -166,7 +166,6 @@ cp lab/.env.example lab/.env
 #   SNOWFLAKE_ACCOUNT, SNOWFLAKE_USER, SNOWFLAKE_PASSWORD
 
 # Step 3 — Create AWS infrastructure (S3, SNS, IAM role)
-python lab/setup_aws.py
 
 # Step 4 — Install Python packages
 pip install -r lab/requirements.txt
